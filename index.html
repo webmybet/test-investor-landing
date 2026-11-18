@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Александр Соколов — частный финансовый инвестор. 14 лет опыта, индивидуальный подход, прозрачность. Запишитесь на бесплатную консультацию." />
+  <meta property="og:title" content="Александр Соколов — Частный инвестор" />
+  <meta property="og:description" content="Помогу вашим деньгам работать — спокойно и надёжно. 14 лет опыта, 200+ клиентов." />
+  <title>Александр Соколов — Частный инвестор</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    /* ===== CSS RESET & VARIABLES ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAF8;
+      --green: #2C6E49;
+      --green-dark: #1E4D35;
+      --green-light: #EAF4EE;
+      --gold: #D4A853;
+      --gold-light: #FBF3E0;
+      --text: #1A1A2E;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --white: #FFFFFF;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(44, 110, 73, 0.08);
+      --shadow-hover: 0 8px 40px rgba(44, 110, 73, 0.16);
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    section { padding: 90px 0; }
+
+    /* ===== SCROLL ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(44,110,73,0.3);
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,110,73,0.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+    }
+    .btn-outline:hover { background: var(--green); color: var(--white); transform: translateY(-2px); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--text);
+      box-shadow: 0 4px 16px rgba(212,168,83,0.35);
+    }
+    .btn-gold:hover { background: #c4993f; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,83,0.45); }
+    .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    /* ===== SECTION LABEL ===== */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(250,250,248,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    header.scrolled { border-color: var(--border); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .logo-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #3d8f61);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(44,110,73,0.3);
+    }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .logo-name { font-size: 15px; color: var(--text); font-family: 'Playfair Display', serif; }
+    .logo-sub { font-size: 11px; color: var(--muted); font-family: 'Inter', sans-serif; font-weight: 400; }
+
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color var(--transition);
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      transform-origin: left;
+    }
+    nav a:hover { color: var(--green); }
+    nav a:hover::after { transform: scaleX(1); }
+
+    .nav-cta { margin-left: 8px; }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border: none;
+      background: none;
+    }
+    .burger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      padding: 16px 0 24px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-menu a {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), color var(--transition);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { background: var(--green-light); color: var(--green); }
+    .mobile-menu .btn { margin: 16px 24px 0; display: flex; justify-content: center; }
+    .mobile-menu.open { display: flex; }
+
+    /* ===== HERO ===== */
+    #hero {
+      padding-top: 140px;
+      padding-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-shape {
+      position: absolute;
+      top: -120px; right: -180px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,110,73,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-bg-shape-2 {
+      position: absolute;
+      bottom: -80px; left: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,168,83,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-label { margin-bottom: 24px; }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .hero h1 span { color: var(--green); }
+    .hero-lead {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      max-width: 500px;
+    }
+    .hero-stats-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .hero-stat strong { color: var(--green); font-weight: 700; }
+    .hero-stat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Avatar + floating cards */
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+    .hero-avatar {
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #3d8f61);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 700;
+      box-shadow: 0 20px 60px rgba(44,110,73,0.25);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-avatar::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed rgba(44,110,73,0.25);
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .floating-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 14px 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      animation: float 3s ease-in-out infinite;
+      z-index: 2;
+    }
+    .floating-card:nth-child(2) { top: 10px; right: -30px; animation-delay: 0s; }
+    .floating-card:nth-child(3) { bottom: 20px; right: -50px; animation-delay: 1s; }
+    .floating-card:nth-child(4) { bottom: 50px; left: -40px; animation-delay: 2s; }
+    .floating-card .fc-num { font-size: 22px; font-weight: 700; color: var(--green); font-family: 'Playfair Display', serif; }
+    .floating-card .fc-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .about-quote {
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+      margin-bottom: 28px;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text);
+      font-family: 'Playfair Display', serif;
+    }
+    .about-text { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
+
+    .about-mentions { margin-top: 32px; }
+    .about-mentions p { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .mentions-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .mention-pill {
+      padding: 8px 20px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .mention-pill:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+
+    .principles-grid { display: grid; gap: 16px; }
+    .principle-card {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      align-items: flex-start;
+    }
+    .principle-card:hover { border-color: var(--green); box-shadow: var(--shadow); transform: translateX(4px); }
+    .principle-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .principle-card:hover .principle-icon { background: var(--green); }
+    .principle-card:hover .principle-icon svg { color: white; }
+    .principle-icon svg { color: var(--green); transition: var(--transition); }
+    .principle-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .principle-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--bg); }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 12px; }
+    .section-header p { font-size: 17px; color: var(--muted); max-width: 560px; margin: 0 auto; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-6px); border-color: transparent; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      transition: var(--transition);
+    }
+    .service-card:hover .service-icon { background: var(--green); }
+    .service-card:hover .service-icon svg { color: white; }
+    .service-icon svg { color: var(--green); transition: var(--transition); }
+    .service-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      background: var(--gold-light);
+      border-radius: 50px;
+      padding: 3px 12px;
+      margin-bottom: 14px;
+    }
+    .service-card h3 { font-size: 20px; margin-bottom: 12px; }
+    .service-desc { font-size: 15px; color: var(--muted); margin-bottom: 20px; line-height: 1.65; }
+    .service-for { font-size: 13px; color: var(--green); font-weight: 500; }
+    .service-for strong { color: var(--text); }
+
+    .services-hint {
+      text-align: center;
+      margin-top: 44px;
+      padding: 24px;
+      background: var(--green-light);
+      border-radius: var(--radius);
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .services-hint a { color: var(--green); font-weight: 600; border-bottom: 1px solid var(--green); transition: opacity var(--transition); }
+    .services-hint a:hover { opacity: 0.7; }
+
+    /* ===== RESULTS ===== */
+    #results { background: var(--white); }
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .case-card {
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      background: var(--bg);
+      border-left: 4px solid var(--green);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .case-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .case-client { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .case-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #5aab7a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .case-name { font-size: 15px; font-weight: 600; }
+    .case-role { font-size: 12px; color: var(--muted); }
+    .case-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
+    .case-text { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.65; }
+    .case-result { font-size: 22px; font-weight: 700; color: var(--green); font-family: 'Playfair Display', serif; }
+    .case-result-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .disclaimer { font-size: 12px; color: var(--muted); text-align: center; margin-top: 32px; opacity: 0.7; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--bg); }
+    .slider-wrapper { position: relative; overflow: hidden; }
+    .slider { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .slide {
+      min-width: 100%;
+      padding: 0 8px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .stars { display: flex; gap: 4px; margin-bottom: 20px; }
+    .stars svg { color: var(--gold); }
+    .testimonial-text { font-size: 17px; color: var(--text); font-style: italic; margin-bottom: 24px; line-height: 1.75; font-family: 'Playfair Display', serif; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5aab7a, var(--green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-weight: 600; font-size: 15px; }
+    .testimonial-role { font-size: 13px; color: var(--muted); }
+
+    .slider-controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 32px; }
+    .slider-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--white);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+      color: var(--muted);
+    }
+    .slider-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+    .slider-dots { display: flex; gap: 8px; }
+    .slider-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+    .slider-dot.active { background: var(--green); transform: scale(1.3); }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 36px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .rating-row strong { color: var(--text); font-size: 20px; }
+
+    /* ===== HOW WE WORK ===== */
+    #process { background: var(--white); }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5% + 18px);
+      right: calc(12.5% + 18px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      z-index: 0;
+    }
+    .step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+    .step-num {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green);
+      font-family: 'Playfair Display', serif;
+      transition: var(--transition);
+      box-shadow: 0 0 0 6px var(--bg);
+    }
+    .step:hover .step-num { background: var(--green); color: white; transform: scale(1.1); }
+    .step h3 { font-size: 16px; margin-bottom: 10px; }
+    .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ===== FAQ ===== */
+    #faq { background: var(--bg); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 940px; margin: 0 auto; }
+    .faq-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .faq-item:hover { border-color: var(--green); }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      gap: 12px;
+      user-select: none;
+    }
+    .faq-question:hover { color: var(--green); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      color: var(--green);
+    }
+    .faq-item.open .faq-icon { background: var(--green); color: white; transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq-answer-inner { padding: 0 24px 20px; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* ===== CTA ===== */
+    #cta {
+      background: var(--green-dark);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 100px 0;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -150px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    #cta::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -100px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(212,168,83,0.08);
+    }
+    #cta .container { position: relative; z-index: 1; }
+    #cta h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--white); margin-bottom: 16px; }
+    #cta p { font-size: 17px; color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 36px; }
+    #cta .btn-gold { font-size: 16px; padding: 18px 44px; }
+    #cta .cta-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 20px; }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 380px; gap: 72px; align-items: start; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 13px; font-weight: 500; color: var(--text); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(44,110,73,0.12);
+    }
+    .form-group textarea { min-height: 120px; }
+    .form-success {
+      display: none;
+      padding: 20px;
+      background: var(--green-light);
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--green);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-info h3 { font-size: 22px; margin-bottom: 4px; }
+    .contact-info .sub { font-size: 15px; color: var(--muted); }
+
+    .contact-item { display: flex; align-items: flex-start; gap: 14px; }
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--green);
+    }
+    .contact-item-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+    .contact-item-value { font-size: 15px; font-weight: 500; }
+    .contact-item-value a:hover { color: var(--green); }
+
+    .socials { display: flex; gap: 12px; }
+    .social-btn {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .social-btn:hover { border-color: var(--green); background: var(--green-light); color: var(--green); transform: translateY(-3px); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.65);
+      padding: 60px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo .logo-name { color: white; font-size: 17px; }
+    .footer-logo .logo-sub { color: rgba(255,255,255,0.45); }
+    .footer-mission { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 12px; line-height: 1.65; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 16px; font-family: 'Inter', sans-serif; }
+    .footer-col a { display: block; font-size: 14px; margin-bottom: 10px; color: rgba(255,255,255,0.65); transition: color var(--transition); }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 13px; }
+    .footer-disclaimer { font-size: 11px; color: rgba(255,255,255,0.3); max-width: 540px; line-height: 1.6; }
+
+    /* ===== BACK TO TOP ===== */
+    #back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(44,110,73,0.4);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: var(--transition);
+      z-index: 999;
+    }
+    #back-top.show { opacity: 1; transform: translateY(0); }
+    #back-top:hover { background: var(--green-dark); transform: translateY(-3px); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+      .hero-actions { justify-content: center; }
+      .hero-stats-row { justify-content: center; }
+      .hero-lead { margin: 0 auto 16px; }
+      .hero-visual { margin: 0 auto; }
+      .floating-card:nth-child(2) { right: -10px; }
+      .floating-card:nth-child(3) { right: -20px; }
+      .floating-card:nth-child(4) { left: -10px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+
+      .steps-row { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .steps-row::before { display: none; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      nav, .nav-cta { display: none; }
+      .burger { display: flex; }
+
+      .hero-avatar { width: 200px; height: 200px; font-size: 48px; }
+      .floating-card { display: none; }
+      .hero-avatar::before { display: none; }
+
+      .steps-row { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .hero-visual { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn { justify-content: center; }
+      .testimonial-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =================== HEADER =================== -->
+<header id="main-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#hero" class="logo">
+        <div class="logo-avatar">АС</div>
+        <div class="logo-text">
+          <span class="logo-name">Александр Соколов</span>
+          <span class="logo-sub">Частный инвестор • 14 лет на рынке</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги</a>
+        <a href="#results">Результаты</a>
+        <a href="#testimonials">Отзывы</a>
+        <a href="#contact">Контакт</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary nav-cta" style="padding:11px 24px;font-size:14px;">Записаться</a>
+
+      <button class="burger" id="burgerBtn" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" class="mobile-link">Обо мне</a>
+      <a href="#services" class="mobile-link">Услуги</a>
+      <a href="#results" class="mobile-link">Результаты</a>
+      <a href="#testimonials" class="mobile-link">Отзывы</a>
+      <a href="#contact" class="mobile-link">Контакт</a>
+      <a href="#contact" class="btn btn-primary">Записаться на консультацию</a>
+    </div>
+  </div>
+</header>
+
+<!-- =================== HERO =================== -->
+<section id="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-shape-2"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content reveal">
+        <div class="hero-label section-label">Частный финансовый инвестор</div>
+        <h1>Помогу вашим деньгам<br/><span>работать — спокойно</span><br/>и надёжно</h1>
+        <p class="hero-lead">Не обещаю «золотых гор» и быстрых схем. Вместе мы выстроим стратегию, которой вы сможете доверять — на годы вперёд.</p>
+        <div class="hero-stats-row">
+          <div class="hero-stat"><div class="hero-stat-dot"></div><strong>14 лет</strong>&nbsp;опыта</div>
+          <div class="hero-stat"><div class="hero-stat-dot"></div><strong>200+</strong>&nbsp;клиентов</div>
+          <div class="hero-stat"><div class="hero-stat-dot"></div><strong>23%</strong>&nbsp;ср. доходность</div>
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Записаться на консультацию
+          </a>
+          <a href="#about" class="btn btn-outline">Узнать подробнее</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="hero-avatar">АС</div>
+        <div class="floating-card">
+          <div class="fc-num" data-count="14">0</div>
+          <div class="fc-label">лет опыта</div>
+        </div>
+        <div class="floating-card">
+          <div class="fc-num" data-count="200">0</div>
+          <div class="fc-label">клиентов</div>
+        </div>
+        <div class="floating-card">
+          <div class="fc-num" data-count="23">0</div>
+          <div class="fc-label">% доходность</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg class="hero-wave" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60L60 50C120 40 240 20 360 16.7C480 13.3 600 26.7 720 30C840 33.3 960 26.7 1080 23.3C1200 20 1320 20 1380 20L1440 20V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0Z" fill="white"/>
+  </svg>
+</section>
+
+<!-- =================== ABOUT =================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="section-label">Обо мне</div>
+        <h2 style="font-size:clamp(1.5rem,2.5vw,2.1rem);margin-bottom:24px;">Почему я, а не управляющая компания?</h2>
+
+        <blockquote class="about-quote">«Я сам терял деньги на плохих решениях. Именно поэтому я так хорошо понимаю, чего хотят мои клиенты — спокойствия и уверенности.»</blockquote>
+
+        <p class="about-text">Всё началось в 2010 году, когда я инвестировал первые накопленные деньги и потерял треть за полгода. Это был болезненный, но ценный урок. Следующие годы я посвятил изучению рынков, рисков и поведенческих паттернов инвесторов.</p>
+        <p class="about-text">Сегодня я работаю с частными клиентами — людьми, которым важно, чтобы кто-то разбирался в их ситуации лично, а не обрабатывал их как один из тысяч счетов. В отличие от крупных управляющих компаний, я знаю имена своих клиентов, их цели и их тревоги.</p>
+        <p class="about-text">Мой подход — долгосрочный, осторожный и честный. Я никогда не обещаю невозможного.</p>
+
+        <div class="about-mentions">
+          <p>Упоминался в</p>
+          <div class="mentions-row">
+            <div class="mention-pill">РБК Инвестиции</div>
+            <div class="mention-pill">Тинькофф Журнал</div>
+            <div class="mention-pill">VC.ru</div>
+            <div class="mention-pill">Финам</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="principles-grid reveal-right">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="principle-title">Индивидуальный подход</div>
+            <div class="principle-desc">Каждый клиент уникален. Никаких шаблонных портфелей — только персональная стратегия.</div>
+          </div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="principle-title">Прозрачность и честность</div>
+            <div class="principle-desc">Вы всегда знаете, куда идут ваши деньги. Отчёты, комментарии, открытый диалог.</div>
+          </div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div>
+            <div class="principle-title">Долгосрочная стратегия</div>
+            <div class="principle-desc">Работаем на горизонте 3–10 лет. Дисциплина и терпение — основа реального богатства.</div>
+          </div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div>
+            <div class="principle-title">Партнёрство, а не услуга</div>
+            <div class="principle-desc">Я заинтересован в вашем росте так же, как и вы. Мы идём к цели вместе.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SERVICES =================== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label" style="justify-content:center;">Услуги</div>
+      <h2>Чем я могу помочь</h2>
+      <p>Три формата работы — выберите тот, что подходит именно вам</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal" style="transition-delay:0.1s">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        </div>
+        <div class="service-tag">Старт</div>
+        <h3>Личная финансовая стратегия</h3>
+        <p class="service-desc">Разбираем вашу текущую ситуацию, цели, горизонт планирования и отношение к риску. На выходе — чёткий персональный план с конкретными шагами.</p>
+        <div class="service-for"><strong>Для кого:</strong> тем, кто только начинает или «застрял» и не знает, что делать дальше</div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.2s">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="service-tag">Популярно</div>
+        <h3>Управление инвестиционным портфелем</h3>
+        <p class="service-desc">Формируем и ведём портфель под ваш профиль риска: акции, облигации, ETF, альтернативные инструменты. Ежемесячные отчёты и корректировки.</p>
+        <div class="service-for"><strong>Для кого:</strong> тем, у кого уже есть капитал от 500 тыс. ₽ и нет времени разбираться самому</div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.3s">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="service-tag">Обучение</div>
+        <h3>Финансовый коучинг</h3>
+        <p class="service-desc">Еженедельные сессии, разбор ваших решений и сделок, обучение анализу. Вы сами управляете деньгами — я помогаю делать это лучше.</p>
+        <div class="service-for"><strong>Для кого:</strong> тем, кто хочет научиться и принимать собственные взвешенные решения</div>
+      </div>
+    </div>
+
+    <div class="services-hint reveal">
+      Не уверены, что подходит? <a href="#contact">Напишите — разберёмся вместе →</a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== RESULTS =================== -->
+<section id="results">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label" style="justify-content:center;">Кейсы</div>
+      <h2>Реальные истории реальных людей</h2>
+    </div>
+
+    <div class="cases-grid">
+      <div class="case-card reveal" style="transition-delay:0.1s">
+        <div class="case-client">
+          <div class="case-avatar">ЕМ</div>
+          <div>
+            <div class="case-name">Елена М.</div>
+            <div class="case-role">Врач, г. Москва</div>
+          </div>
+        </div>
+        <div class="case-label">Задача</div>
+        <p class="case-text">Накопила 1,2 млн ₽, держала на вкладе. Хотела сохранить деньги от инфляции и немного заработать, но боялась потерять.</p>
+        <div class="case-label">Решение</div>
+        <p class="case-text">Выстроили консервативный портфель: 60% ОФЗ и корпоративные облигации, 30% дивидендные акции, 10% золотой ETF. Начали осторожно, наращивали постепенно.</p>
+        <div class="case-result">+31%</div>
+        <div class="case-result-label">за 18 месяцев при минимальном риске</div>
+      </div>
+
+      <div class="case-card reveal" style="transition-delay:0.2s">
+        <div class="case-client">
+          <div class="case-avatar" style="background:linear-gradient(135deg,#8B5E3C,#c47f3a)">МВ</div>
+          <div>
+            <div class="case-name">Михаил В.</div>
+            <div class="case-role">Предприниматель</div>
+          </div>
+        </div>
+        <div class="case-label">Задача</div>
+        <p class="case-text">Бизнес давал хороший доход, но все деньги работали только в бизнесе. Хотел диверсифицировать и создать «подушку» за рамками компании.</p>
+        <div class="case-label">Решение</div>
+        <p class="case-text">Создали отдельный инвестиционный счёт с умеренно-агрессивной стратегией. Регулярные пополнения 100 тыс./мес. Акции роста + международные ETF.</p>
+        <div class="case-result">4,8 млн ₽</div>
+        <div class="case-result-label">личный капитал за 3 года с нуля</div>
+      </div>
+
+      <div class="case-card reveal" style="transition-delay:0.3s">
+        <div class="case-client">
+          <div class="case-avatar" style="background:linear-gradient(135deg,#4A6FA5,#6b93c9)">СК</div>
+          <div>
+            <div class="case-name">Семья Ковалёвых</div>
+            <div class="case-role">Два работающих человека</div>
+          </div>
+        </div>
+        <div class="case-label">Задача</div>
+        <p class="case-text">Молодая семья хотела накопить на квартиру и одновременно создать пенсионный капитал. Бюджет — 50 тыс. ₽/мес.</p>
+        <div class="case-label">Решение</div>
+        <p class="case-text">Разделили цели: краткосрочный консервативный счёт на квартиру (3 года) + долгосрочный ИИС с налоговым вычетом на пенсию. Две стратегии — два горизонта.</p>
+        <div class="case-result">+820 тыс. ₽</div>
+        <div class="case-result-label">вернули через налоговый вычет ИИС за 4 года</div>
+      </div>
+    </div>
+
+    <p class="disclaimer reveal">* Имена изменены с согласия клиентов. Прошлые результаты не гарантируют будущих.</p>
+  </div>
+</section>
+
+<!-- =================== TESTIMONIALS =================== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label" style="justify-content:center;">Отзывы</div>
+      <h2>Что говорят клиенты</h2>
+    </div>
+
+    <div class="slider-wrapper reveal">
+      <div class="slider" id="slider">
+        <div class="slide">
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">«Я обращалась к Александру после неудачного опыта с другим консультантом. С первой встречи почувствовала: он не пытается мне что-то продать, он реально пытается разобраться в моей ситуации. За год работы я не только заработала, но и наконец-то перестала бояться слова "инвестиции".»</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">АС</div>
+              <div>
+                <div class="testimonial-name">Анна С.</div>
+                <div class="testimonial-role">Преподаватель, Санкт-Петербург</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">«Работаем с Александром уже три года. Мне нравится, что он всегда объясняет свои решения — почему мы покупаем вот это, почему продаём то. Никогда не чувствую себя лишним звеном. Результатами доволен — порядка 25% в год на умеренном портфеле.»</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" style="background:linear-gradient(135deg,#8B5E3C,#c47f3a)">ДК</div>
+              <div>
+                <div class="testimonial-name">Дмитрий К.</div>
+                <div class="testimonial-role">IT-руководитель, Москва</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">«Пришла к Александру, когда муж вышел на пенсию и мы не понимали, что делать с накоплениями. Он очень терпеливо объяснил всё с нуля, не давил, не торопил. Теперь у нас есть чёткий план, и мы спим спокойно. Это дорогого стоит.»</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" style="background:linear-gradient(135deg,#4A6FA5,#6b93c9)">НП</div>
+              <div>
+                <div class="testimonial-name">Наталья П.</div>
+                <div class="testimonial-role">Бухгалтер, Екатеринбург</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="testimonial-card">
+            <div class="stars">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">«Выбирал между брокером и частным инвестором долго. Решила попробовать Александра — и не пожалела. Коучинг — это именно то, что мне было нужно: я хотел сам принимать решения, но не хотел ошибаться по-крупному. Теперь торгую самостоятельно и уверенно.»</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" style="background:linear-gradient(135deg,#5E3C8B,#8b5fc4)">ОГ</div>
+              <div>
+                <div class="testimonial-name">Олег Г.</div>
+                <div class="testimonial-role">Юрист, Казань</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-btn" id="sliderPrev" aria-label="Назад">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="slider-dots" id="sliderDots"></div>
+        <button class="slider-btn" id="sliderNext" aria-label="Вперёд">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="rating-row reveal">
+      <div class="stars" style="gap:3px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4A853"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4A853"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4A853"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4A853"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4A853"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <strong>4.9</strong> <span>из 5 на основе 47 отзывов</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PROCESS =================== -->
+<section id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label" style="justify-content:center;">Процесс</div>
+      <h2>Просто о процессе</h2>
+      <p>Четыре шага от «привет» до растущего портфеля</p>
+    </div>
+
+    <div class="steps-row">
+      <div class="step reveal" style="transition-delay:0.1s">
+        <div class="step-num">1</div>
+        <h3>Знакомство</h3>
+        <p>Бесплатная 30-минутная консультация. Рассказываете о себе, я рассказываю о подходе. Без обязательств.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:0.2s">
+        <div class="step-num">2</div>
+        <h3>Диагностика</h3>
+        <p>Изучаю вашу финансовую ситуацию, цели, горизонт и отношение к риску. Задаю нужные вопросы.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:0.3s">
+        <div class="step-num">3</div>
+        <h3>Стратегия</h3>
+        <p>Готовлю персональный план и презентую его вам. Обсуждаем, дорабатываем. Вы принимаете решение.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:0.4s">
+        <div class="step-num">4</div>
+        <h3>Сопровождение</h3>
+        <p>Работаем вместе. Встречи раз в месяц, ежемесячные отчёты, оперативная связь при важных событиях.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FAQ =================== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label" style="justify-content:center;">FAQ</div>
+      <h2>Часто задаваемые вопросы</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Нужен ли большой стартовый капитал?
+          <div class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Для коучинга и разработки стратегии — нет, начать можно с любой суммы. Для управления портфелем рекомендую от 500 тыс. ₽, чтобы диверсификация была эффективной. Но давайте обсудим вашу ситуацию — я не оставлю вас ни с чем, если сумма меньше.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Вы торгуете на бирже сами или управляете моими деньгами?
+          <div class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Деньги всегда остаются на вашем брокерском счёте. Я не имею к ним прямого доступа. Мы совместно принимаем решения, и вы сами подтверждаете каждую сделку — либо я действую по вашей доверенности, строго в рамках согласованной стратегии.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Какие гарантии доходности?
+          <div class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Честный ответ: никто не может гарантировать доходность на рынке — ни я, ни крупный банк. Любой, кто обещает фиксированный процент, нарушает закон или лжёт. Я гарантирую профессиональный подход, прозрачность и дисциплину — это и есть основа хорошего результата в долгосрочной перспективе.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Как часто мы будем общаться?
+          <div class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Встреча раз в месяц (онлайн или офлайн в Москве) — стандарт. Плюс ежемесячный письменный отчёт. При важных рыночных событиях — оперативное сообщение. Я не пропадаю и всегда отвечаю на вопросы в течение рабочего дня.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Вы лицензированный специалист?
+          <div class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Я зарегистрирован как ИП и оказываю консультационные услуги в соответствии с законодательством РФ. Я не являюсь лицензированным управляющим активами в смысле ЦБ РФ — это важно понимать. Деятельность — консультирование и образование, не доверительное управление.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Как начать работу?
+          <div class="faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Просто напишите мне через форму ниже или в Telegram. Мы договоримся о бесплатной вводной встрече на 30 минут. Никаких предварительных обязательств — просто познакомимся и поймём, есть ли смысл работать вместе.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA =================== -->
+<section id="cta">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" style="justify-content:center;color:rgba(255,255,255,0.6)">Начать</div>
+      <h2>Первый шаг — самый важный</h2>
+      <p>Запишитесь на бесплатную 30-минутную консультацию. Без обязательств. Просто поговорим.</p>
+      <a href="#contact" class="btn btn-gold">Записаться бесплатно</a>
+      <p class="cta-note">Отвечаю в течение 24 часов</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CONTACT =================== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <div class="section-label">Контакт</div>
+        <h2 style="font-size:clamp(1.5rem,2.5vw,2.1rem);margin-bottom:8px;">Напишите мне</h2>
+        <p style="color:var(--muted);margin-bottom:36px;">Расскажите о себе и своей ситуации — я отвечу лично</p>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Ваше имя *</label>
+              <input type="text" id="fname" name="name" placeholder="Иван Иванов" required />
+            </div>
+            <div class="form-group">
+              <label for="femail">Email *</label>
+              <input type="email" id="femail" name="email" placeholder="ivan@mail.ru" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fphone">Телефон</label>
+              <input type="tel" id="fphone" name="phone" placeholder="+7 (___) ___-__-__" />
+            </div>
+            <div class="form-group">
+              <label for="fservice">Интересует</label>
+              <select id="fservice" name="service">
+                <option value="">Выберите...</option>
+                <option>Личная финансовая стратегия</option>
+                <option>Управление портфелем</option>
+                <option>Финансовый коучинг</option>
+                <option>Не определился</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fmessage">Ваш вопрос или ситуация</label>
+            <textarea id="fmessage" name="message" placeholder="Расскажите коротко о своей ситуации и что хотите получить от работы со мной..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Отправить
+          </button>
+          <div class="form-success" id="formSuccess">
+            ✅ Спасибо! Свяжусь с вами в течение 24 часов.
+          </div>
+        </form>
+      </div>
+
+      <div class="contact-info reveal-right">
+        <div>
+          <h3>Александр Соколов</h3>
+          <p class="sub">Частный инвестор • Финансовый консультант</p>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2h-19A2.5 2.5 0 0 0 0 4.5v15A2.5 2.5 0 0 0 2.5 22h19a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 21.5 2zM22 7l-10 7L2 7"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value"><a href="mailto:alex@sokolov-invest.ru">alex@sokolov-invest.ru</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .6 4.312l5.1.9 1.8 5.1a2.25 2.25 0 0 0 4.312-.6l2.5-16.5a2.25 2.25 0 0 0-2.79-2.927z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Telegram</div>
+            <div class="contact-item-value"><a href="https://t.me/sokolov_invest" target="_blank">@sokolov_invest</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Часы работы</div>
+            <div class="contact-item-value">Пн–Пт, 9:00–19:00 МСК</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-item-label" style="font-size:12px;color:var(--muted);margin-bottom:12px;">Соцсети</div>
+          <div class="socials">
+            <a href="#" class="social-btn" title="Telegram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .6 4.312l5.1.9 1.8 5.1a2.25 2.25 0 0 0 4.312-.6l2.5-16.5a2.25 2.25 0 0 0-2.79-2.927z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="ВКонтакте">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17h-1.816c-.69 0-.9-.548-2.139-1.797-1.08-1.04-1.556-.981-1.556-.981s-.32.059-.32.981V17h-1.44s-3.46.199-5.24-3.72c0 0-2.68-5.4-2.68-5.56H6.6c0 0 .199.44.26.6.72 1.78 2.919 6.14 3.1 6.14 0 0 .379-.38.359-2.779 0 0 .04-1.08-.34-1.56-.279-.359-.759-.46-.98-.5a3.78 3.78 0 0 1 .88-.16s1.56-.119 2.42 1.04v.019c0 0 .28.4.28 1.42 0 0-.02 1.879.84 1.879 0 0 .4 0 1.52-1.94 0 0 1.28-2.42 1.42-2.84l.159-.38H17c0 0-.219.4-.58 1.04-1.159 2.14-1.519 2.84-1.519 3.038 0 .238.179.419.579.698C16.1 13.98 17 14.979 17 16.42c0 0 .08.58-.619.58z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="logo footer-logo" style="margin-bottom:0">
+          <div class="logo-avatar" style="width:38px;height:38px;font-size:13px;">АС</div>
+          <div class="logo-text">
+            <span class="logo-name">Александр Соколов</span>
+            <span class="logo-sub">Частный инвестор</span>
+          </div>
+        </div>
+        <p class="footer-mission">Помогаю людям выстраивать устойчивые финансовые стратегии — без суеты и пустых обещаний.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги</a>
+        <a href="#results">Результаты</a>
+        <a href="#testimonials">Отзывы</a>
+        <a href="#process">Процесс</a>
+        <a href="#contact">Контакт</a>
+      </div>
+      <div class="footer-col">
+        <h4>Услуги</h4>
+        <a href="#services">Финансовая стратегия</a>
+        <a href="#services">Управление портфелем</a>
+        <a href="#services">Финансовый коучинг</a>
+        <a href="#contact">Консультация</a>
+      </div>
+      <div class="footer-col">
+        <h4>Правовое</h4>
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Пользовательское соглашение</a>
+        <a href="#">Раскрытие информации</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Александр Соколов. ИП Соколов А.В. ИНН: 770000000000</div>
+      <p class="footer-disclaimer">Информация на сайте носит ознакомительный характер и не является индивидуальной инвестиционной рекомендацией в соответствии со ст. 2 Федерального закона «О рынке ценных бумаг».</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="back-top" aria-label="Наверх">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  /* ===== HEADER SCROLL ===== */
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+    document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+
+  /* ===== BURGER MENU ===== */
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link, .mobile-menu .btn').forEach(el => {
+    el.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ===== SCROLL REVEAL ===== */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ===== COUNTER ANIMATION ===== */
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const step = timestamp => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + (progress === 1 ? suffix : '');
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const count = parseInt(el.dataset.count);
+        animateCounter(el, count, el.dataset.suffix || '');
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+  /* ===== SLIDER ===== */
+  const slider = document.getElementById('slider');
+  const slides = slider.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('sliderDots');
+  let current = 0;
+  let autoTimer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    slider.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  document.getElementById('sliderPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
+  autoTimer = setInterval(() => goTo(current + 1), 5000);
+
+  /* ===== FAQ ACCORDION ===== */
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ===== CONTACT FORM ===== */
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.textContent = 'Отправляем...';
+    btn.disabled = true;
+    setTimeout(() => {
+      e.target.querySelector('button[type=submit]').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      e.target.reset();
+    }, 1000);
+  });
+
+  /* ===== BACK TO TOP ===== */
+  document.getElementById('back-top').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
