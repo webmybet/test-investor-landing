@@ -317,6 +317,14 @@
     }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
     .floating-card {
       position: absolute;
       background: var(--white);
@@ -870,7 +878,7 @@
   <div class="container">
     <div class="header-inner">
       <a href="#hero" class="logo">
-        <div class="logo-avatar">АС</div>
+        <div class="logo-avatar"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" /></div>
         <div class="logo-text">
           <span class="logo-name">Александр Соколов</span>
           <span class="logo-sub">Частный инвестор • 14 лет на рынке</span>
@@ -926,7 +934,7 @@
       </div>
 
       <div class="hero-visual reveal">
-        <div class="hero-avatar">АС</div>
+        <div class="hero-avatar"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" /></div>
         <div class="floating-card">
           <div class="fc-num" data-count="14">0</div>
           <div class="fc-label">лет опыта</div>
@@ -1469,7 +1477,7 @@
     <div class="footer-top">
       <div>
         <div class="logo footer-logo" style="margin-bottom:0">
-          <div class="logo-avatar" style="width:38px;height:38px;font-size:13px;">АС</div>
+          <div class="logo-avatar" style="width:38px;height:38px;font-size:13px;"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
           <div class="logo-text">
             <span class="logo-name">Александр Соколов</span>
             <span class="logo-sub">Частный инвестор</span>
