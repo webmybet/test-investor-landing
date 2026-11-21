@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Александр Соколов — частный финансовый инвестор. 10 лет опыта, индивидуальный подход, прозрачность. Запишитесь на бесплатную консультацию." />
+  <meta name="description" content="Александр Соколов — частный финансовый инвестор. 14 лет опыта, индивидуальный подход, прозрачность. Запишитесь на бесплатную консультацию." />
   <meta property="og:title" content="Александр Соколов — Частный инвестор" />
   <meta property="og:description" content="Помогу вашим деньгам работать — спокойно и надёжно. 14 лет опыта, 200+ клиентов." />
   <title>Александр Соколов — Частный инвестор</title>
@@ -31,7 +31,11 @@
       --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      scroll-padding-top: 80px;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -124,7 +128,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(250,250,248,0.85);
+      background: rgba(250,250,248,0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid transparent;
@@ -157,6 +161,7 @@
       font-size: 15px;
       font-weight: 700;
       flex-shrink: 0;
+      overflow: hidden;
       box-shadow: 0 2px 10px rgba(44,110,73,0.3);
     }
     .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
@@ -182,8 +187,10 @@
       transition: transform var(--transition);
       transform-origin: left;
     }
-    nav a:hover { color: var(--green); }
-    nav a:hover::after { transform: scaleX(1); }
+    nav a:hover,
+    nav a.active { color: var(--green); }
+    nav a:hover::after,
+    nav a.active::after { transform: scaleX(1); }
 
     .nav-cta { margin-left: 8px; }
 
@@ -195,7 +202,9 @@
       padding: 8px;
       border: none;
       background: none;
+      border-radius: 6px;
     }
+    .burger:focus-visible { outline: 2px solid var(--green); }
     .burger span {
       display: block;
       width: 24px; height: 2px;
@@ -345,6 +354,8 @@
     .hero-wave {
       position: absolute;
       bottom: -1px; left: 0; right: 0;
+      width: 100%;
+      display: block;
     }
 
     /* ===== ABOUT ===== */
@@ -512,11 +523,16 @@
     .case-result { font-size: 22px; font-weight: 700; color: var(--green); font-family: 'Playfair Display', serif; }
     .case-result-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-    .disclaimer { font-size: 12px; color: var(--muted); text-align: center; margin-top: 32px; opacity: 0.7; }
+    .disclaimer { font-size: 12px; color: var(--muted); text-align: center; margin-top: 32px; opacity: 0.8; }
 
     /* ===== TESTIMONIALS ===== */
     #testimonials { background: var(--bg); }
-    .slider-wrapper { position: relative; overflow: hidden; }
+    .slider-wrapper {
+      position: relative;
+      overflow: hidden;
+      touch-action: pan-y pinch-zoom;
+      user-select: none;
+    }
     .slider { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
     .slide {
       min-width: 100%;
@@ -561,6 +577,7 @@
       color: var(--muted);
     }
     .slider-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+    .slider-btn:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
     .slider-dots { display: flex; gap: 8px; }
     .slider-dot {
       width: 8px; height: 8px;
@@ -569,6 +586,7 @@
       cursor: pointer;
       transition: var(--transition);
       border: none;
+      padding: 0;
     }
     .slider-dot.active { background: var(--green); transform: scale(1.3); }
 
@@ -630,10 +648,15 @@
       border-radius: var(--radius);
       border: 1px solid var(--border);
       overflow: hidden;
-      transition: var(--transition);
+      transition: border-color var(--transition);
     }
-    .faq-item:hover { border-color: var(--green); }
+    .faq-item:hover, .faq-item.open { border-color: var(--green); }
     .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-family: inherit;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -641,10 +664,13 @@
       cursor: pointer;
       font-weight: 600;
       font-size: 15px;
+      color: var(--text);
       gap: 12px;
       user-select: none;
+      transition: color var(--transition);
     }
     .faq-question:hover { color: var(--green); }
+    .faq-question:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
     .faq-icon {
       flex-shrink: 0;
       width: 24px; height: 24px;
@@ -653,20 +679,30 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
+      transition: transform var(--transition), background-color var(--transition), color var(--transition);
       color: var(--green);
     }
     .faq-item.open .faq-icon { background: var(--green); color: white; transform: rotate(45deg); }
+    
     .faq-answer {
-      max-height: 0;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+    .faq-answer-inner {
       overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0 24px;
       font-size: 14px;
       color: var(--muted);
       line-height: 1.7;
+      transition: padding-bottom 0.35s ease;
     }
-    .faq-answer-inner { padding: 0 24px 20px; }
-    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-item.open .faq-answer-inner {
+      padding-bottom: 20px;
+    }
 
     /* ===== CTA ===== */
     #cta {
@@ -727,15 +763,57 @@
       box-shadow: 0 0 0 3px rgba(44,110,73,0.12);
     }
     .form-group textarea { min-height: 120px; }
+
+    .form-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    .form-checkbox input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: var(--green);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .form-checkbox a {
+      color: var(--green);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .form-checkbox a:hover { opacity: 0.8; }
+
     .form-success {
       display: none;
-      padding: 20px;
+      padding: 24px;
       background: var(--green-light);
       border-radius: var(--radius);
       text-align: center;
-      color: var(--green);
-      font-weight: 600;
+      color: var(--green-dark);
       font-size: 15px;
+      border: 1px solid rgba(44,110,73,0.2);
+    }
+    .form-success p { font-weight: 600; margin-bottom: 12px; }
+
+    .btn-reset-form {
+      display: inline-block;
+      background: var(--white);
+      border: 1.5px solid var(--green);
+      color: var(--green);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn-reset-form:hover {
+      background: var(--green);
+      color: var(--white);
     }
 
     .contact-info { display: flex; flex-direction: column; gap: 28px; }
@@ -770,6 +848,7 @@
       transition: var(--transition);
     }
     .social-btn:hover { border-color: var(--green); background: var(--green-light); color: var(--green); transform: translateY(-3px); }
+    .social-btn:focus-visible { outline: 2px solid var(--green); }
 
     /* ===== FOOTER ===== */
     footer {
@@ -783,11 +862,12 @@
       gap: 48px;
       margin-bottom: 48px;
     }
+    .footer-logo .logo-avatar { width: 38px; height: 38px; }
     .footer-logo .logo-name { color: white; font-size: 17px; }
     .footer-logo .logo-sub { color: rgba(255,255,255,0.45); }
     .footer-mission { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 12px; line-height: 1.65; }
     .footer-col h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 16px; font-family: 'Inter', sans-serif; }
-    .footer-col a { display: block; font-size: 14px; margin-bottom: 10px; color: rgba(255,255,255,0.65); transition: color var(--transition); }
+    .footer-col a { display: block; font-size: 14px; margin-bottom: 10px; color: rgba(255,255,255,0.65); transition: color var(--transition); cursor: pointer; }
     .footer-col a:hover { color: var(--gold); }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -823,6 +903,102 @@
     }
     #back-top.show { opacity: 1; transform: translateY(0); }
     #back-top:hover { background: var(--green-dark); transform: translateY(-3px); }
+    #back-top:focus-visible { outline: 2px solid var(--gold); }
+
+    /* ===== MODAL DIALOG ===== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 36px 32px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-backdrop.open .modal-box {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .modal-close:hover {
+      background: var(--green-light);
+      color: var(--green);
+      border-color: var(--green);
+    }
+    .modal-title {
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: var(--text);
+      padding-right: 32px;
+    }
+    .modal-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .modal-body h4 {
+      font-size: 16px;
+      color: var(--text);
+      margin: 16px 0 8px;
+    }
+    .modal-body p { margin-bottom: 12px; }
+
+    /* ===== ACCESSIBILITY: PREFERS REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal, .reveal-left, .reveal-right {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .hero-avatar::before {
+        animation: none !important;
+      }
+      .floating-card {
+        animation: none !important;
+      }
+    }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
@@ -862,6 +1038,7 @@
       .form-row { grid-template-columns: 1fr; }
 
       .hero-visual { justify-content: center; }
+      .modal-box { padding: 24px 20px; }
     }
 
     @media (max-width: 480px) {
@@ -877,24 +1054,26 @@
 <header id="main-header">
   <div class="container">
     <div class="header-inner">
-      <a href="#hero" class="logo">
-        <div class="logo-avatar"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" /></div>
+      <a href="#hero" class="logo" aria-label="На главную">
+        <div class="logo-avatar"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" width="42" height="42" /></div>
         <div class="logo-text">
           <span class="logo-name">Александр Соколов</span>
           <span class="logo-sub">Частный инвестор • 14 лет на рынке</span>
         </div>
       </a>
 
-      <nav>
+      <nav id="desktopNav">
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
         <a href="#results">Результаты</a>
         <a href="#testimonials">Отзывы</a>
+        <a href="#process">Процесс</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Контакт</a>
       </nav>
       <a href="#contact" class="btn btn-primary nav-cta" style="padding:11px 24px;font-size:14px;">Записаться</a>
 
-      <button class="burger" id="burgerBtn" aria-label="Меню">
+      <button class="burger" id="burgerBtn" aria-label="Меню навигации" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -903,6 +1082,8 @@
       <a href="#services" class="mobile-link">Услуги</a>
       <a href="#results" class="mobile-link">Результаты</a>
       <a href="#testimonials" class="mobile-link">Отзывы</a>
+      <a href="#process" class="mobile-link">Процесс</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
       <a href="#contact" class="mobile-link">Контакт</a>
       <a href="#contact" class="btn btn-primary">Записаться на консультацию</a>
     </div>
@@ -934,24 +1115,26 @@
       </div>
 
       <div class="hero-visual reveal">
-        <div class="hero-avatar"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" /></div>
+        <div class="hero-avatar">
+          <img src="f.jpg" alt="Александр Соколов" class="avatar-img" width="260" height="260" />
+        </div>
         <div class="floating-card">
           <div class="fc-num" data-count="14">0</div>
           <div class="fc-label">лет опыта</div>
         </div>
         <div class="floating-card">
-          <div class="fc-num" data-count="200">0</div>
+          <div class="fc-num" data-count="200" data-suffix="+">0</div>
           <div class="fc-label">клиентов</div>
         </div>
         <div class="floating-card">
-          <div class="fc-num" data-count="23">0</div>
-          <div class="fc-label">% доходность</div>
+          <div class="fc-num" data-count="23" data-suffix="%">0</div>
+          <div class="fc-label">ср. доходность</div>
         </div>
       </div>
     </div>
   </div>
 
-  <svg class="hero-wave" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="hero-wave" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0 60L60 50C120 40 240 20 360 16.7C480 13.3 600 26.7 720 30C840 33.3 960 26.7 1080 23.3C1200 20 1320 20 1380 20L1440 20V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0Z" fill="white"/>
   </svg>
 </section>
@@ -974,7 +1157,7 @@
           <p>Упоминался в</p>
           <div class="mentions-row">
             <div class="mention-pill">РБК Инвестиции</div>
-            <div class="mention-pill">Тинькофф Журнал</div>
+            <div class="mention-pill">Т-Ж</div>
             <div class="mention-pill">VC.ru</div>
             <div class="mention-pill">Финам</div>
           </div>
@@ -1124,7 +1307,7 @@
         <div class="case-label">Решение</div>
         <p class="case-text">Разделили цели: краткосрочный консервативный счёт на квартиру (3 года) + долгосрочный ИИС с налоговым вычетом на пенсию. Две стратегии — два горизонта.</p>
         <div class="case-result">+820 тыс. ₽</div>
-        <div class="case-result-label">вернули через налоговый вычет ИИС за 4 года</div>
+        <div class="case-result-label">налоговые вычеты ИИС + инвестиционный доход за 4 года</div>
       </div>
     </div>
 
@@ -1140,7 +1323,7 @@
       <h2>Что говорят клиенты</h2>
     </div>
 
-    <div class="slider-wrapper reveal">
+    <div class="slider-wrapper reveal" id="sliderWrapper">
       <div class="slider" id="slider">
         <div class="slide">
           <div class="testimonial-card">
@@ -1211,7 +1394,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
-            <p class="testimonial-text">«Выбирал между брокером и частным инвестором долго. Решила попробовать Александра — и не пожалела. Коучинг — это именно то, что мне было нужно: я хотел сам принимать решения, но не хотел ошибаться по-крупному. Теперь торгую самостоятельно и уверенно.»</p>
+            <p class="testimonial-text">«Выбирал между брокером и частным инвестором долго. Решил попробовать Александра — и не пожалел. Коучинг — это именно то, что мне было нужно: я хотел сам принимать решения, но не хотел ошибаться по-крупному. Теперь торгую самостоятельно и уверенно.»</p>
             <div class="testimonial-author">
               <div class="testimonial-avatar" style="background:linear-gradient(135deg,#5E3C8B,#8b5fc4)">ОГ</div>
               <div>
@@ -1224,11 +1407,11 @@
       </div>
 
       <div class="slider-controls">
-        <button class="slider-btn" id="sliderPrev" aria-label="Назад">
+        <button class="slider-btn" id="sliderPrev" aria-label="Предыдущий отзыв">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <div class="slider-dots" id="sliderDots"></div>
-        <button class="slider-btn" id="sliderNext" aria-label="Вперёд">
+        <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Индикаторы отзывов"></div>
+        <button class="slider-btn" id="sliderNext" aria-label="Следующий отзыв">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -1291,63 +1474,75 @@
 
     <div class="faq-grid">
       <div class="faq-item reveal">
-        <div class="faq-question">
-          Нужен ли большой стартовый капитал?
-          <div class="faq-icon">
+        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-1" id="faq-q-1">
+          <span>Нужен ли большой стартовый капитал?</span>
+          <span class="faq-icon" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-ans-1" role="region" aria-labelledby="faq-q-1">
+          <div class="faq-answer-inner">Для коучинга и разработки стратегии — нет, начать можно с любой суммы. Для управления портфелем рекомендую от 500 тыс. ₽, чтобы диверсификация была эффективной. Но давайте обсудим вашу ситуацию — я не оставлю вас ни с чем, если сумма меньше.</div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Для коучинга и разработки стратегии — нет, начать можно с любой суммы. Для управления портфелем рекомендую от 500 тыс. ₽, чтобы диверсификация была эффективной. Но давайте обсудим вашу ситуацию — я не оставлю вас ни с чем, если сумма меньше.</div></div>
       </div>
 
       <div class="faq-item reveal">
-        <div class="faq-question">
-          Вы торгуете на бирже сами или управляете моими деньгами?
-          <div class="faq-icon">
+        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-2" id="faq-q-2">
+          <span>Вы торгуете на бирже сами или управляете моими деньгами?</span>
+          <span class="faq-icon" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-ans-2" role="region" aria-labelledby="faq-q-2">
+          <div class="faq-answer-inner">Деньги всегда остаются на вашем брокерском счёте. Я не имею к ним прямого доступа. Мы совместно принимаем решения, и вы сами подтверждаете каждую сделку — либо я действую по вашей доверенности, строго в рамках согласованной стратегии.</div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Деньги всегда остаются на вашем брокерском счёте. Я не имею к ним прямого доступа. Мы совместно принимаем решения, и вы сами подтверждаете каждую сделку — либо я действую по вашей доверенности, строго в рамках согласованной стратегии.</div></div>
       </div>
 
       <div class="faq-item reveal">
-        <div class="faq-question">
-          Какие гарантии доходности?
-          <div class="faq-icon">
+        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-3" id="faq-q-3">
+          <span>Какие гарантии доходности?</span>
+          <span class="faq-icon" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-ans-3" role="region" aria-labelledby="faq-q-3">
+          <div class="faq-answer-inner">Честный ответ: никто не может гарантировать доходность на рынке — ни я, ни крупный банк. Любой, кто обещает фиксированный процент, нарушает закон или лжёт. Я гарантирую профессиональный подход, прозрачность и дисциплину — это и есть основа хорошего результата в долгосрочной перспективе.</div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Честный ответ: никто не может гарантировать доходность на рынке — ни я, ни крупный банк. Любой, кто обещает фиксированный процент, нарушает закон или лжёт. Я гарантирую профессиональный подход, прозрачность и дисциплину — это и есть основа хорошего результата в долгосрочной перспективе.</div></div>
       </div>
 
       <div class="faq-item reveal">
-        <div class="faq-question">
-          Как часто мы будем общаться?
-          <div class="faq-icon">
+        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-4" id="faq-q-4">
+          <span>Как часто мы будем общаться?</span>
+          <span class="faq-icon" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-ans-4" role="region" aria-labelledby="faq-q-4">
+          <div class="faq-answer-inner">Встреча раз в месяц (онлайн или офлайн в Москве) — стандарт. Плюс ежемесячный письменный отчёт. При важных рыночных событиях — оперативное сообщение. Я не пропадаю и всегда отвечаю на вопросы в течение рабочего дня.</div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Встреча раз в месяц (онлайн или офлайн в Москве) — стандарт. Плюс ежемесячный письменный отчёт. При важных рыночных событиях — оперативное сообщение. Я не пропадаю и всегда отвечаю на вопросы в течение рабочего дня.</div></div>
       </div>
 
       <div class="faq-item reveal">
-        <div class="faq-question">
-          Вы лицензированный специалист?
-          <div class="faq-icon">
+        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-5" id="faq-q-5">
+          <span>Вы лицензированный специалист?</span>
+          <span class="faq-icon" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-ans-5" role="region" aria-labelledby="faq-q-5">
+          <div class="faq-answer-inner">Я зарегистрирован как ИП и оказываю консультационные услуги в соответствии с законодательством РФ. Я не являюсь лицензированным управляющим активами в смысле ЦБ РФ — это важно понимать. Деятельность — консультирование и образование, не доверительное управление.</div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Я зарегистрирован как ИП и оказываю консультационные услуги в соответствии с законодательством РФ. Я не являюсь лицензированным управляющим активами в смысле ЦБ РФ — это важно понимать. Деятельность — консультирование и образование, не доверительное управление.</div></div>
       </div>
 
       <div class="faq-item reveal">
-        <div class="faq-question">
-          Как начать работу?
-          <div class="faq-icon">
+        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-6" id="faq-q-6">
+          <span>Как начать работу?</span>
+          <span class="faq-icon" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-ans-6" role="region" aria-labelledby="faq-q-6">
+          <div class="faq-answer-inner">Просто напишите мне через форму ниже или в Telegram. Мы договоримся о бесплатной вводной встрече на 30 минут. Никаких предварительных обязательств — просто познакомимся и поймём, есть ли смысл работать вместе.</div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Просто напишите мне через форму ниже или в Telegram. Мы договоримся о бесплатной вводной встрече на 30 минут. Никаких предварительных обязательств — просто познакомимся и поймём, есть ли смысл работать вместе.</div></div>
       </div>
     </div>
   </div>
@@ -1375,21 +1570,21 @@
         <h2 style="font-size:clamp(1.5rem,2.5vw,2.1rem);margin-bottom:8px;">Напишите мне</h2>
         <p style="color:var(--muted);margin-bottom:36px;">Расскажите о себе и своей ситуации — я отвечу лично</p>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="fname">Ваше имя *</label>
-              <input type="text" id="fname" name="name" placeholder="Иван Иванов" required />
+              <input type="text" id="fname" name="name" placeholder="Иван Иванов" required autocomplete="name" />
             </div>
             <div class="form-group">
               <label for="femail">Email *</label>
-              <input type="email" id="femail" name="email" placeholder="ivan@mail.ru" required />
+              <input type="email" id="femail" name="email" placeholder="ivan@mail.ru" required autocomplete="email" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="fphone">Телефон</label>
-              <input type="tel" id="fphone" name="phone" placeholder="+7 (___) ___-__-__" />
+              <input type="tel" id="fphone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" />
             </div>
             <div class="form-group">
               <label for="fservice">Интересует</label>
@@ -1406,12 +1601,19 @@
             <label for="fmessage">Ваш вопрос или ситуация</label>
             <textarea id="fmessage" name="message" placeholder="Расскажите коротко о своей ситуации и что хотите получить от работы со мной..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+
+          <div class="form-checkbox">
+            <input type="checkbox" id="fconsent" required checked />
+            <label for="fconsent">Я согласен на <a href="#" class="legal-link" data-doc="privacy">обработку персональных данных</a> в соответствии с Федеральным законом № 152-ФЗ</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btnSubmit" style="align-self:flex-start;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             Отправить
           </button>
-          <div class="form-success" id="formSuccess">
-            ✅ Спасибо! Свяжусь с вами в течение 24 часов.
+          <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+            <p>✅ Спасибо! Ваша заявка принята. Свяжусь с вами в течение 24 часов.</p>
+            <button type="button" class="btn-reset-form" id="btnResetForm">Отправить ещё одну заявку</button>
           </div>
         </form>
       </div>
@@ -1438,7 +1640,7 @@
           </div>
           <div>
             <div class="contact-item-label">Telegram</div>
-            <div class="contact-item-value"><a href="https://t.me/sokolov_invest" target="_blank">@sokolov_invest</a></div>
+            <div class="contact-item-value"><a href="https://t.me/sokolov_invest" target="_blank" rel="noopener noreferrer">@sokolov_invest</a></div>
           </div>
         </div>
 
@@ -1455,13 +1657,13 @@
         <div>
           <div class="contact-item-label" style="font-size:12px;color:var(--muted);margin-bottom:12px;">Соцсети</div>
           <div class="socials">
-            <a href="#" class="social-btn" title="Telegram">
+            <a href="https://t.me/sokolov_invest" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram" aria-label="Telegram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .6 4.312l5.1.9 1.8 5.1a2.25 2.25 0 0 0 4.312-.6l2.5-16.5a2.25 2.25 0 0 0-2.79-2.927z"/></svg>
             </a>
-            <a href="#" class="social-btn" title="YouTube">
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube" aria-label="YouTube">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
             </a>
-            <a href="#" class="social-btn" title="ВКонтакте">
+            <a href="https://vk.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="ВКонтакте" aria-label="ВКонтакте">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17h-1.816c-.69 0-.9-.548-2.139-1.797-1.08-1.04-1.556-.981-1.556-.981s-.32.059-.32.981V17h-1.44s-3.46.199-5.24-3.72c0 0-2.68-5.4-2.68-5.56H6.6c0 0 .199.44.26.6.72 1.78 2.919 6.14 3.1 6.14 0 0 .379-.38.359-2.779 0 0 .04-1.08-.34-1.56-.279-.359-.759-.46-.98-.5a3.78 3.78 0 0 1 .88-.16s1.56-.119 2.42 1.04v.019c0 0 .28.4.28 1.42 0 0-.02 1.879.84 1.879 0 0 .4 0 1.52-1.94 0 0 1.28-2.42 1.42-2.84l.159-.38H17c0 0-.219.4-.58 1.04-1.159 2.14-1.519 2.84-1.519 3.038 0 .238.179.419.579.698C16.1 13.98 17 14.979 17 16.42c0 0 .08.58-.619.58z"/></svg>
             </a>
           </div>
@@ -1477,7 +1679,7 @@
     <div class="footer-top">
       <div>
         <div class="logo footer-logo" style="margin-bottom:0">
-          <div class="logo-avatar" style="width:38px;height:38px;font-size:13px;"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
+          <div class="logo-avatar"><img src="f.jpg" alt="Александр Соколов" class="avatar-img" width="38" height="38" /></div>
           <div class="logo-text">
             <span class="logo-name">Александр Соколов</span>
             <span class="logo-sub">Частный инвестор</span>
@@ -1492,6 +1694,7 @@
         <a href="#results">Результаты</a>
         <a href="#testimonials">Отзывы</a>
         <a href="#process">Процесс</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Контакт</a>
       </div>
       <div class="footer-col">
@@ -1503,15 +1706,15 @@
       </div>
       <div class="footer-col">
         <h4>Правовое</h4>
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">Пользовательское соглашение</a>
-        <a href="#">Раскрытие информации</a>
+        <a href="#" class="legal-link" data-doc="privacy">Политика конфиденциальности</a>
+        <a href="#" class="legal-link" data-doc="terms">Пользовательское соглашение</a>
+        <a href="#" class="legal-link" data-doc="risk">Раскрытие информации</a>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copy">© 2024 Александр Соколов. ИП Соколов А.В. ИНН: 770000000000</div>
-      <p class="footer-disclaimer">Информация на сайте носит ознакомительный характер и не является индивидуальной инвестиционной рекомендацией в соответствии со ст. 2 Федерального закона «О рынке ценных бумаг».</p>
+      <div class="footer-copy">© <span id="copyrightYear">2026</span> Александр Соколов. ИП Соколов А.В. ИНН: 770000000000</div>
+      <p class="footer-disclaimer">Информация на сайте носит исключительно ознакомительный характер и не является индивидуальной инвестиционной рекомендацией в соответствии со ст. 2 Федерального закона «О рынке ценных бумаг».</p>
     </div>
   </div>
 </footer>
@@ -1521,26 +1724,68 @@
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
+<!-- =================== LEGAL MODAL =================== -->
+<div class="modal-backdrop" id="legalModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Закрыть окно">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3 class="modal-title" id="modalTitle">Юридическая информация</h3>
+    <div class="modal-body" id="modalBody">
+      <!-- Динамический контент -->
+    </div>
+  </div>
+</div>
+
 <script>
-  /* ===== HEADER SCROLL ===== */
+  /* ===== DYNAMIC COPYRIGHT YEAR ===== */
+  const yearEl = document.getElementById('copyrightYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ===== HEADER SCROLL & BACK TO TOP ===== */
   const header = document.getElementById('main-header');
+  const backTop = document.getElementById('back-top');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 20);
-    document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
+    backTop.classList.toggle('show', window.scrollY > 400);
   }, { passive: true });
+
+  backTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   /* ===== BURGER MENU ===== */
   const burger = document.getElementById('burgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
+
+  function closeMobileMenu() {
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+  }
+
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = burger.classList.toggle('open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    mobileMenu.classList.toggle('open', isOpen);
   });
+
   document.querySelectorAll('.mobile-link, .mobile-menu .btn').forEach(el => {
-    el.addEventListener('click', () => {
-      burger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
+    el.addEventListener('click', closeMobileMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('open') && !header.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (mobileMenu.classList.contains('open')) closeMobileMenu();
+      if (document.getElementById('legalModal').classList.contains('open')) closeLegalModal();
+    }
   });
 
   /* ===== SCROLL REVEAL ===== */
@@ -1555,6 +1800,25 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => observer.observe(el));
 
+  /* ===== SCROLLSPY (ACTIVE NAV LINK) ===== */
+  const navLinks = document.querySelectorAll('#desktopNav a');
+  const sections = Array.from(navLinks).map(link => {
+    const id = link.getAttribute('href').replace('#', '');
+    return document.getElementById(id);
+  }).filter(Boolean);
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(sec => spyObserver.observe(sec));
+
   /* ===== COUNTER ANIMATION ===== */
   function animateCounter(el, target, suffix = '') {
     let start = 0;
@@ -1563,7 +1827,7 @@
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target) + (progress === 1 ? suffix : '');
+      el.textContent = Math.floor(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -1573,25 +1837,29 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         const el = e.target;
-        const count = parseInt(el.dataset.count);
+        const count = parseInt(el.dataset.count, 10);
         animateCounter(el, count, el.dataset.suffix || '');
         counterObserver.unobserve(el);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4 });
   document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-  /* ===== SLIDER ===== */
+  /* ===== SLIDER (TOUCH & PAUSE ENABLED) ===== */
+  const sliderWrapper = document.getElementById('sliderWrapper');
   const slider = document.getElementById('slider');
   const slides = slider.querySelectorAll('.slide');
   const dotsContainer = document.getElementById('sliderDots');
   let current = 0;
   let autoTimer;
+  let isPaused = false;
 
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+    dot.setAttribute('aria-label', `Перейти к отзыву ${i + 1}`);
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
     dot.addEventListener('click', () => goTo(i));
     dotsContainer.appendChild(dot);
   });
@@ -1599,41 +1867,199 @@
   function goTo(idx) {
     current = (idx + slides.length) % slides.length;
     slider.style.transform = `translateX(-${current * 100}%)`;
-    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => {
+      const active = i === current;
+      d.classList.toggle('active', active);
+      d.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    restartAutoTimer();
+  }
+
+  function restartAutoTimer() {
     clearInterval(autoTimer);
-    autoTimer = setInterval(() => goTo(current + 1), 5000);
+    if (!isPaused) {
+      autoTimer = setInterval(() => goTo(current + 1), 6000);
+    }
   }
 
   document.getElementById('sliderPrev').addEventListener('click', () => goTo(current - 1));
   document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
-  autoTimer = setInterval(() => goTo(current + 1), 5000);
 
-  /* ===== FAQ ACCORDION ===== */
-  document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
+  // Pause on hover & focus
+  sliderWrapper.addEventListener('mouseenter', () => { isPaused = true; clearInterval(autoTimer); });
+  sliderWrapper.addEventListener('mouseleave', () => { isPaused = false; restartAutoTimer(); });
+  sliderWrapper.addEventListener('focusin', () => { isPaused = true; clearInterval(autoTimer); });
+  sliderWrapper.addEventListener('focusout', () => { isPaused = false; restartAutoTimer(); });
+
+  // Touch Swipe
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  sliderWrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  sliderWrapper.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0) goTo(current + 1); // swipe left
+      else goTo(current - 1);          // swipe right
+    }
+  }, { passive: true });
+
+  restartAutoTimer();
+
+  /* ===== FAQ ACCORDION (A11Y FRIENDLY) ===== */
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isAlreadyOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        const qBtn = i.querySelector('.faq-question');
+        if (qBtn) qBtn.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isAlreadyOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
-  /* ===== CONTACT FORM ===== */
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type=submit]');
-    btn.textContent = 'Отправляем...';
-    btn.disabled = true;
-    setTimeout(() => {
-      e.target.querySelector('button[type=submit]').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-      e.target.reset();
-    }, 1000);
+  /* ===== PHONE INPUT FORMAT MASK ===== */
+  const phoneInput = document.getElementById('fphone');
+  phoneInput.addEventListener('input', (e) => {
+    let x = e.target.value.replace(/\D/g, '');
+    if (x.startsWith('7') || x.startsWith('8')) x = x.substring(1);
+    x = x.substring(0, 10);
+
+    let formatted = '+7';
+    if (x.length > 0) formatted += ' (' + x.substring(0, 3);
+    if (x.length >= 3) formatted += ') ' + x.substring(3, 6);
+    if (x.length >= 6) formatted += '-' + x.substring(6, 8);
+    if (x.length >= 8) formatted += '-' + x.substring(8, 10);
+
+    e.target.value = x.length ? formatted : '';
   });
 
-  /* ===== BACK TO TOP ===== */
-  document.getElementById('back-top').addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  /* ===== CONTACT FORM SUBMISSION ===== */
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const btnSubmit = document.getElementById('btnSubmit');
+  const btnReset = document.getElementById('btnResetForm');
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('fname');
+    const emailInput = document.getElementById('femail');
+    const consentInput = document.getElementById('fconsent');
+
+    if (!nameInput.value.trim()) {
+      nameInput.focus();
+      return;
+    }
+    if (!emailInput.value.trim() || !emailInput.checkValidity()) {
+      emailInput.focus();
+      return;
+    }
+    if (!consentInput.checked) {
+      alert('Пожалуйста, подтвердите согласие на обработку персональных данных.');
+      consentInput.focus();
+      return;
+    }
+
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = 'Отправка...';
+
+    setTimeout(() => {
+      btnSubmit.style.display = 'none';
+      formSuccess.style.display = 'block';
+      contactForm.reset();
+    }, 800);
+  });
+
+  btnReset.addEventListener('click', () => {
+    formSuccess.style.display = 'none';
+    btnSubmit.style.display = 'inline-flex';
+    btnSubmit.disabled = false;
+    btnSubmit.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Отправить
+    `;
+  });
+
+  /* ===== LEGAL MODAL ===== */
+  const legalModal = document.getElementById('legalModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+
+  const legalContent = {
+    privacy: {
+      title: 'Политика конфиденциальности и обработки данных (152-ФЗ)',
+      html: `
+        <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки и меры по обеспечению безопасности данных.</p>
+        <h4>1. Собираемые данные</h4>
+        <p>Оператор обрабатывает следующие персональные данные: фамилия, имя, номер контактного телефона, адрес электронной почты.</p>
+        <h4>2. Цели обработки</h4>
+        <p>Персональные данные собираются исключительно для связи с клиентом, проведения первичных консультаций и подготовки персональных финансовых предложений.</p>
+        <h4>3. Безопасность и хранение</h4>
+        <p>Данные не передаются третьим лицам без вашего согласия, за исключением случаев, предусмотренных законодательством РФ. Вы можете отозвать согласие в любой момент, направив письмо на alex@sokolov-invest.ru.</p>
+      `
+    },
+    terms: {
+      title: 'Пользовательское соглашение',
+      html: `
+        <p>Используя данный сайт, вы подтверждаете согласие со следующими условиями:</p>
+        <h4>1. Характер информации</h4>
+        <p>Все материалы, опубликованные на сайте, носят исключительно информационно-просветительский характер и не являются публичной офертой в соответствии со ст. 437 ГК РФ.</p>
+        <h4>2. Отсутствие гарантий</h4>
+        <p>Любые примеры доходности и кейсы основаны на исторических данных клиентов и не гарантируют аналогичных результатов в будущем.</p>
+        <h4>3. Интеллектуальная собственность</h4>
+        <p>Тексты, структура и фирменные материалы защищены авторским правом. Любое копирование допускается только с письменного согласия владельца сайта.</p>
+      `
+    },
+    risk: {
+      title: 'Раскрытие информации и уведомление о рисках',
+      html: `
+        <h4>1. Предупреждение о рисках</h4>
+        <p>Инвестиции в фондовый рынок, ценные бумаги, фонды и альтернативные активы сопряжены с риском потери капитала. Прошлые результаты не определяют будущие доходы.</p>
+        <h4>2. Статус консультанта</h4>
+        <p>Деятельность осуществляется в качестве индивидуального предпринимателя в формате информационно-консультационных услуг. Консультант не осуществляет доверительное управление денежными средствами.</p>
+        <h4>3. Принятие решений</h4>
+        <p>Все окончательные решения о сделках инвестор принимает самостоятельно на своём личном брокерском счёте.</p>
+      `
+    }
+  };
+
+  function openLegalModal(docKey) {
+    const doc = legalContent[docKey] || legalContent.privacy;
+    modalTitle.textContent = doc.title;
+    modalBody.innerHTML = doc.html;
+    legalModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLegalModal() {
+    legalModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.legal-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const docKey = link.dataset.doc || 'privacy';
+      openLegalModal(docKey);
+    });
+  });
+
+  modalClose.addEventListener('click', closeLegalModal);
+  legalModal.addEventListener('click', (e) => {
+    if (e.target === legalModal) closeLegalModal();
   });
 </script>
 </body>
